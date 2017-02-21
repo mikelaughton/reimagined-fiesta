@@ -1,0 +1,20 @@
+{% extends "reminders/base.html" %}
+{% load static %}
+{% get_media_prefix as media_prefix %}
+
+{% block title %} Adulting {% endblock %}
+{% block content %}
+		<div class="row" id="">
+{% for task in tasks %}
+			<div class="activity-group col-xs-6 col-sm-4 col-md-3" id="1">
+				<h1 class="activity_title">{{task.label}}</h1>
+				<!-- poop-moji -->
+				<p class="activity_icon"><img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}"></p>
+				<p class="time">
+					<time>{{ task.deadline|timeuntil }}</time> until <time>{{ task.deadline }}</time> 
+				</p>
+			</div>
+{% endfor %}
+		</div>
+
+{% endblock %}

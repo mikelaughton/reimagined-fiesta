@@ -1,0 +1,4 @@
+* Click to perform task
+* Secret tasks
+* Class to colour the task (user option)?
+* Countup and countdown implementation
