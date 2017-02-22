@@ -1,0 +1,15 @@
+{% extends "reminders/base.html" %}
+{% load i18n %}
+{% block title %} Register {% endblock %}
+
+{% block content %}
+<form action="{% url 'reminders:register' %}" method="post">
+<table>
+{% csrf_token %}
+{{form.as_table}}
+</table>
+<small>Don't register! I'm not handling your data securely at all!</small>
+<input type="submit" value="Register">
+</form>
+
+{% endblock %}

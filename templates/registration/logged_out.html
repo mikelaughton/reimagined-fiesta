@@ -1,0 +1,11 @@
+{% extends "reminders/base.html" %}
+{% load i18n %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+<p>{% trans "You done logged out there, son." noop as logout_text %}{{ logout_text }}</p>
+
+{% trans "login" as login_text %}
+<p>Would you like to <a href="{% url 'login' %}" title="{{login_text}}">{{login_text}}</a> again?</p>
+
+{% endblock %}

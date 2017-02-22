@@ -25,7 +25,7 @@ SECRET_KEY = 'l5of6a$o*uh5n2utu7m)e022@08%bhez8o@2ak2uzolz0$g__%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pi-desktop','192.168.0.20']
+ALLOWED_HOSTS = ['pi-desktop','192.168.0.20','192.168.0.10','localhost']
 
 
 # Application definition
@@ -118,7 +118,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_ROOT = '/var/www/adulting/static'
-MEDIA_ROOT = '/var/www/adulting/media'
+#STATIC_ROOT = '/var/www/adulting/static'
+#MEDIA_ROOT = '/var/www/adulting/media'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
+#We want to go to the homepage
+LOGIN_REDIRECT_URL = '/'
