@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-
+from datetime import datetime
 def _(arg):
 	#Dummy _ function pending i18n, which you've forgotten.
 	return arg
@@ -22,7 +22,7 @@ class Task(models.Model):
 	deadline = models.DateTimeField(_('Deadline'),blank=True,null=True)
 	icon = models.ForeignKey(Icon,null=True,blank=True)
 	is_secret = models.BooleanField(_('Secret?'))
-
+	countdown = models.BooleanField(_('Countdown'),help_text=_('Countdown or countup?'),default=True)
 	def last_performed(self):
 		return self.performance_set.perf_date().order_by('-perf_date')[0]
 	def __str__(self):
