@@ -1,0 +1,40 @@
+{% extends "reminders/base.html" %}
+{% load static i18n %}
+{% get_media_prefix as media_prefix %}
+
+{% block title %} Adulting: {{ task }} detail {% endblock %}
+{% block content %}
+		<div class="row" id="">
+			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
+				<h1 class="activity_title">{{task.label}}</h1>
+				<!-- poop-moji -->
+				<p class="activity_icon"><img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}"></p>
+				<table>
+					<tr>
+						<th>{% trans 'Date entered' noop %}</th>
+						<td><time>{{ task.entry_date|date:"d F Y" }} {{ task.entry_date|time:"H:i" }}</time></td>
+					</tr>
+					<tr>
+						{% if countdown %}
+						<th>Deadline</th>
+						<td>{{ task.deadline|date:"d F Y" }} {{ task.deadline|date:"H:i" }}</td>
+						{% else %}
+						<th>Last performance</th>
+						<td>{{ task.last_performed|date:"d F Y" }} {{ task.last_performed|date:"H:i" }}</td>.
+						{% endif %}
+					</tr>
+					</tr>
+					<tr>
+						<th colspan="2">
+						Performance history
+						</th>
+					</tr>
+					{% for performance in task.performance_set.all %}
+					<tr>
+					<td colspan="2">
+						<time>{{ performance.perf_date|date:"d F Y" }} {{ performance.perf_date|time:"H:i" }}</time>
+					</td>
+					</tr>
+					{% endfor %}
+				</table>
+{% endblock %}

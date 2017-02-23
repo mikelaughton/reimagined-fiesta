@@ -27,3 +27,7 @@ class RegisterView(generic.edit.CreateView):
 	template_name = 'reminders/register.html'
 	form_class = UserCreationForm
 	success_url = '/'
+
+class TaskDetailView(generic.DetailView):
+	model = Task
+	

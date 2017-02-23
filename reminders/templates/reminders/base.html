@@ -16,7 +16,7 @@
 	</head>
 	<body>
 	<header>
-		<h1>Adulting</h1>
+		<h1><a href="{% url 'reminders:index' %}">Adulting</a></h1>
 		<p>Life's pya hard. At least remember to get your haircut, you filthy commie.</p>
 		{%if user.is_authenticated %}
 		<p>Howdy {{user.username}}. <a href="{% url 'logout' %}">Logout?</a></p>

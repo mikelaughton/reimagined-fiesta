@@ -11,7 +11,11 @@
 				<!-- poop-moji -->
 				<p class="activity_icon"><img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}"></p>
 				<p class="time">
+					{% if task.countdown %}					
 					<time>{{ task.deadline|timeuntil }}</time> until <time>{{ task.deadline }}</time> 
+					{% else %}
+					<time>{{ task.last_performed|timesince }}</time> since you last did it.</time>
+					{% endif %} 
 				</p>
 			</div>
 {% endfor %}

@@ -1,11 +1,12 @@
 * Click to perform task
 * Secret tasks
 * Class to colour the task (user option)?
-* Countup implementation
+* Countup implementation (done)
 * Countdown implementation (done)
 * Login (done)
 * Logout (done)
 * Register (done)
+* Task detail (see history of) (done).
 * Receive notifications when the thing expires (done)
 * So, one thing to do is to create a separate Python script that polls the tasks database for all the ones with an expired and expired_email flag (non-editable for the user). Every minute or so, cron could run this script to email you that the thing that's timed down has timed down.
 	How would you get recurring emails?

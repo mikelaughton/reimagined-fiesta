@@ -22,9 +22,10 @@ class Task(models.Model):
 	deadline = models.DateTimeField(_('Deadline'),blank=True,null=True)
 	icon = models.ForeignKey(Icon,null=True,blank=True)
 	is_secret = models.BooleanField(_('Secret?'))
+	#Mebs change the widget on this.
 	countdown = models.BooleanField(_('Countdown'),help_text=_('Countdown or countup?'),default=True)
 	def last_performed(self):
-		return self.performance_set.perf_date().order_by('-perf_date')[0]
+		return self.performance_set.order_by('-perf_date')[0].perf_date
 	def __str__(self):
 		return self.label
 
@@ -32,3 +33,5 @@ class Performance(models.Model):
 	#For when a task is performed.
 	task = models.ForeignKey(Task)
 	perf_date = models.DateTimeField(_('Date performed'))
+	def __str__(self):
+		return "{}: {}".format(self.task.pk,self.perf_date)
