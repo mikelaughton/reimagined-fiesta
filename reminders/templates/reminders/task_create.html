@@ -1,0 +1,17 @@
+{% extends "reminders/base.html" %}
+{% load static i18n %}
+{% get_media_prefix as media_prefix %}
+
+{% block title %} Adulting: Create a task {% endblock %}
+{% block content %}
+		<div class="row" id="">
+			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
+				<h1 class="activity_title">{{performance.task.label}}</h1>
+				<form action="{% url 'reminders:create' %}" method="post">
+					{% csrf_token %}
+					{{ form.as_p }}
+					<input type="submit" value="submit">
+				</form>
+			</div>
+		</div>
+{% endblock %}

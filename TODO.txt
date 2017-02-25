@@ -1,8 +1,12 @@
-* Click to perform task
+* Click to perform task (done, although poorly)
+* Add task view
+* Shift styles, scripts to external static files
+* Performance should dismiss countdown tasks (i.e. move them to an archive) and reset counter on countup tasks.
 * Secret tasks
-* Class to colour the task (poorly implemented)?
+* Class to colour the task (done, maybe add more themes)
 * Countup implementation (done)
-* Countdown implementation (done)
+	* Work out how to refresh timesince/timeuntil with jQuery. (You may have to implement timesince in jQuery, which seems like a waste of time.)
+* Countdown implementation (done, need to dismiss task)
 * Recurring notes/non-recurring notes
 * Login (done)
 * Logout (done)

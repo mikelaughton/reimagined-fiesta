@@ -23,6 +23,46 @@
 					 }
 		.task-green a { color: #A9E2AD; }
 {% endblock %}
+{% block extra_head %}
+		<script>
+			//Probably best putting this in an external script. Thanks Django docs!
+			function getCookie(name) {
+				var cookieValue = null;
+				if (document.cookie && document.cookie !== '') {
+					var cookies = document.cookie.split(';');
+					for (var i = 0; i < cookies.length; i++) {
+						var cookie = jQuery.trim(cookies[i]);
+						// Does this cookie string begin with the name we want?
+						if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						    break;
+						}
+					}
+				}
+				return cookieValue;
+			}
+			var csrftoken = getCookie('csrftoken');
+
+			$(document).ready(function(){
+				$("a.btn").click(function(e){
+					e.preventDefault(); console.log(e.target.href);;
+					t = $.post(e.target.href,{the_task:e.target.href[-1], csrfmiddlewaretoken: csrftoken });
+					console.log(t.responseText);
+					$(e.target).parent().find("p.time").text("New!");
+					console.log(e.target);
+					console.log($(e.target).parent());
+					console.log($(e.target).parentsUntil("div").find("time"));
+					/*btn = e.target.id;
+					$(btn.id).removeClass("btn-success");
+					$(btn.id).addClass("btn-neutral");
+					t = $.load($(btn.id).href);
+					newClass = (t == "Hurray") ? "btn-success" : "btn-warning";
+					$(btn.id).removeClass("btn-neutral");
+					$(btn.id).addClass(newClass)*/
+			});
+			});
+		</script>
+{% endblock %}
 {% block content %}
 		<div class="row" id="non-secret-row">
 		<!-- begin row -->
@@ -38,7 +78,7 @@
 					{% if task.countdown %}					
 					<time>{{ task.deadline|timeuntil }}</time> <span class="ancillary">{% trans 'until' noop %}</span> <time>{{ task.deadline }}</time> 
 					{% else %}
-						{% if task.last_performed|length > 0 %}
+						{% if task.last_performed|date|length > 0 %}
 						<time>{{ task.last_performed|timesince }}</time> <span class="ancillary">{% trans 'since you last did it' noop %}</span>.
 						{% else %}
 						{% trans 'Not yet performed' noop %}.

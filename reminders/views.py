@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 # Create your views here.
 
 from .models import *
+from reminders.forms import *
 
 #Reverse lazy to stop there being a circular import error.
 @method_decorator(login_required, name='dispatch')
@@ -31,6 +32,15 @@ class RegisterView(generic.edit.CreateView):
 class TaskDetailView(generic.DetailView):
 	model = Task
 
+class TaskCreateView(generic.edit.CreateView):
+	model = Task
+	template_name_suffix = '_create'
+	form_class = TaskForm
+	@login_required
+	def form_valid(self,form):
+		form.instance.user = self.request.user
+		return super(TaskCreateView,self).form_valid(form)
+
 class PerformanceChangeView(generic.edit.CreateView):
 	model = Performance
 	fields = ['perf_date']
@@ -40,12 +50,16 @@ class PerformanceChangeView(generic.edit.CreateView):
 		return context
 
 def PerformView(request,task_id):
-	the_task = get_object_or_404(Task,pk=task_id)
-	new_perf = Performance(perf_date=datetime.now(),task=the_task)
-	try:
-		new_perf.save()
-		return HttpResponse("Hurray")
-	except KeyError:
-		return HttpResponse("Key error.")
-	else:
-		return HttpResponse("Fail")
+	if request.method == "POST":
+		the_task = get_object_or_404(Task,pk=task_id)
+		new_perf = Performance(perf_date=datetime.now(),task=the_task)
+		try:
+			new_perf.save()
+			return HttpResponse("Hurray")
+		except KeyError:
+			return HttpResponse("Key error.")
+		else:
+			return HttpResponse("Fail")
+	elif request.method=="GET":
+		#Set up a proper view.
+		return HttpResponse("Nah mate.")
