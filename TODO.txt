@@ -1,6 +1,6 @@
 * Click to perform task
 * Secret tasks
-* Class to colour the task (user option)?
+* Class to colour the task (poorly implemented)?
 * Countup implementation (done)
 * Countdown implementation (done)
 * Recurring notes/non-recurring notes

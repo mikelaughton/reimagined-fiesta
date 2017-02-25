@@ -4,10 +4,23 @@
 
 {% block title %} Adulting {% endblock %}
 {% block style %}
-	.activity_group { margin: 5%; } 
-	{% for task in tasks %}	
-		div#task_{{task.pk}} { background-color: {{ task.colour|safe|default:"#FFF" }}; }
-	{% endfor %}
+	.activity_group { margin: 5%; } 	
+		.task-red { background-color: #F44336; 
+					color: white;
+					 }
+		.task-red a { color: #FFEF86; }
+		.task-yellow { background-color: #FFEB3B;
+						color: black;
+						}
+		.task-blue { 
+					background-color: #2196F3;
+					color: white;
+					}
+		.task-blue a { color: #FFD727; }
+		.task-green {
+					background-color: #4CAF50;
+					color: white;
+					 }
 {% endblock %}
 {% block content %}
 		<div class="row" id="non-secret-row">
@@ -15,7 +28,7 @@
 {% for task in tasks %}
 			<!-- bootstrap spacing -->
 			<div class="col-xs-6 col-sm-4 col-md-3">
-			<div class="activity-group well" id="task_{{ task.pk }}">
+			<div class="activity-group well task-{{task.colour}}" id="task_{{ task.pk }}">
 				<h1 class="activity_title"><a href="{% url 'reminders:detail' pk=task.pk %}">{{task.label}}</a></h1>
 				<img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}">
 				<p class="time">

@@ -16,7 +16,13 @@ class Icon(models.Model):
 		return self.description
 
 #This should be a theme choice, i.e., naming a class, not designating a colour. Crazy lack of flexibility. Moron.
-COLOUR_CHOICES = [('#F44336', 'red'), ('#4CAF50', 'green'), ('#FFEB3B', 'yellow'), ('#2196F3', 'blue')]
+#COLOUR_CHOICES = [('#F44336', 'red'), ('#4CAF50', 'green'), ('#FFEB3B', 'yellow'), ('#2196F3', 'blue')]
+COLOUR_CHOICES = (
+	('red','red'),
+	('yellow','yellow'),
+	('blue','blue'),
+	('green','green'),
+)
 
 class Task(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,blank=True,null=True)
