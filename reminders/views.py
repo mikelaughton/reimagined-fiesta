@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth import authenticate, login
@@ -30,4 +30,22 @@ class RegisterView(generic.edit.CreateView):
 
 class TaskDetailView(generic.DetailView):
 	model = Task
-	
+
+class PerformanceChangeView(generic.edit.CreateView):
+	model = Performance
+	fields = ['perf_date']
+	template_name_suffix = '_update_form'
+	def get_context_data(self,**kwargs):
+		context = super(PerformanceChangeView,self).get_context_data(**kwargs)
+		return context
+
+def PerformView(request,task_id):
+	the_task = get_object_or_404(Task,pk=task_id)
+	new_perf = Performance(perf_date=datetime.now(),task=the_task)
+	try:
+		new_perf.save()
+		return HttpResponse("Hurray")
+	except KeyError:
+		return HttpResponse("Key error.")
+	else:
+		return HttpResponse("Fail")

@@ -6,6 +6,7 @@
 {% block content %}
 		<div class="row" id="">
 			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
+				<p><a href="{% url 'reminders:index' %}">Go back</a><p>
 				<h1 class="activity_title">{{task.label}}</h1>
 				<!-- poop-moji -->
 				<p class="activity_icon"><img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}"></p>
