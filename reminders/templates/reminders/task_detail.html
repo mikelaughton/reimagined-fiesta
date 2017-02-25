@@ -20,7 +20,11 @@
 						<td>{{ task.deadline|date:"d F Y" }} {{ task.deadline|date:"H:i" }}</td>
 						{% else %}
 						<th>Last performance</th>
+						{% if task.last_performed|length > 0 %}
 						<td>{{ task.last_performed|date:"d F Y" }} {{ task.last_performed|date:"H:i" }}</td>.
+						{% else %}
+						<td>Not yet performed.</td>
+						{% endif %}
 						{% endif %}
 					</tr>
 					</tr>
@@ -35,6 +39,10 @@
 						<time>{{ performance.perf_date|date:"d F Y" }} {{ performance.perf_date|time:"H:i" }}</time>
 					</td>
 					</tr>
+					{% empty %}
+					<td colspan="2">
+					Not yet performed.
+					</td>
 					{% endfor %}
 				</table>
 {% endblock %}

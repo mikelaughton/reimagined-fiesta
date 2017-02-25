@@ -3,6 +3,7 @@
 * Class to colour the task (user option)?
 * Countup implementation (done)
 * Countdown implementation (done)
+* Recurring notes/non-recurring notes
 * Login (done)
 * Logout (done)
 * Register (done)

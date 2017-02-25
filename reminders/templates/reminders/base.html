@@ -9,17 +9,35 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<!--
+			Dominant colour: 008080;
+			Complement colour: #07648D;
+			Accent colour: CCAE14;
+			Secondary colour: FF5AC2;
+			-->
 		<style>
+			header { background-color: teal; color: white; text-align:center;  }
+			header h1#site_title a { color: white; }
+			header a { color: #CCA214; font-weight: bold; } 
+			header nav#user-options { background-color: #07648D; 
+color:black; 
+text-align:right; }
+			header nav#user-options a { color: #CCAE14; }
 			p>time{ font-size:180%; }
+			//.activity-group p .ancillary { color: #FF5AC2; }
 			.activity-group{ text-align:center; }
+			footer { background-color: #07648D; color:black; text-align:center; } 
+			{% block style %}{% endblock %}
 		</style>
 	</head>
 	<body>
 	<header>
-		<h1><a href="{% url 'reminders:index' %}">Adulting</a></h1>
+		<h1 id="site_title"><a href="{% url 'reminders:index' %}">Adulting</a></h1>
 		<p>Life's pya hard. At least remember to get your haircut, you filthy commie.</p>
 		{%if user.is_authenticated %}
+		<nav id="user-options">		
 		<p>Howdy {{user.username}}. <a href="{% url 'logout' %}">Logout?</a></p>
+		</nav>
 		{% endif %}
 	</header>
 	<section id="main" class="container-fluid">

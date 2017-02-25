@@ -1,24 +1,40 @@
 {% extends "reminders/base.html" %}
-{% load static %}
+{% load static i18n %}
 {% get_media_prefix as media_prefix %}
 
 {% block title %} Adulting {% endblock %}
+{% block style %}
+	.activity_group { margin: 5%; } 
+	{% for task in tasks %}	
+		div#task_{{task.pk}} { background-color: {{ task.colour|safe|default:"#FFF" }}; }
+	{% endfor %}
+{% endblock %}
 {% block content %}
-		<div class="row" id="">
+		<div class="row" id="non-secret-row">
+		<!-- begin row -->
 {% for task in tasks %}
-			<div class="activity-group col-xs-6 col-sm-4 col-md-3" id="1">
-				<h1 class="activity_title">{{task.label}}</h1>
-				<!-- poop-moji -->
-				<p class="activity_icon"><img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}"></p>
+			<!-- bootstrap spacing -->
+			<div class="col-xs-6 col-sm-4 col-md-3">
+			<div class="activity-group well" id="task_{{ task.pk }}">
+				<h1 class="activity_title"><a href="{% url 'reminders:detail' pk=task.pk %}">{{task.label}}</a></h1>
+				<img src="{% get_media_prefix %}/{{task.icon.icon}}" alt="{{task.icon}}">
 				<p class="time">
 					{% if task.countdown %}					
-					<time>{{ task.deadline|timeuntil }}</time> until <time>{{ task.deadline }}</time> 
+					<time>{{ task.deadline|timeuntil }}</time> <span class="ancillary">{% trans 'until' noop %}</span> <time>{{ task.deadline }}</time> 
 					{% else %}
-					<time>{{ task.last_performed|timesince }}</time> since you last did it.</time>
+						{% if task.last_performed|length > 0 %}
+						<time>{{ task.last_performed|timesince }}</time> <span class="ancillary">{% trans 'since you last did it' noop %}</span>.
+						{% else %}
+						{% trans 'Not yet performed' noop %}.
+						{% endif %}
 					{% endif %} 
 				</p>
+				<p><a href="#" class="btn btn-success">Done</a></p>
 			</div>
+			</div>
+			<!-- end bootstrap spacing -->
 {% endfor %}
+		<!-- end .row -->
 		</div>
 
 {% endblock %}
