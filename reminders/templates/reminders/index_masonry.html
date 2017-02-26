@@ -1,10 +1,28 @@
-{% extends "reminders/base.html" %}
+{% extends "reminders/base_masonry.html" %}
 {% load static i18n %}
 {% get_media_prefix as media_prefix %}
 
 {% block title %} Adulting {% endblock %}
 {% block style %}
-		.activity_group { margin: 5%; } 	
+		.grid { max-width: 98%; margin: 1% auto; }
+		.grid-item { margin-bottom: 2%; }
+		.grid-sizer { width: 25%; }
+		@media screen and (min-width: 1025px) {
+			/*guttering be hard, yo.*/
+		.grid-item { width: calc(25% - 2%); }
+		}
+		@media screen and (max-width: 1024px) {
+		  .grid-sizer{ width: 33%; }
+		  .grid-item { width: calc(33.3333% - 2%); }	
+		}
+		@media screen and (max-width: 768px) {
+		.grid-item { width: 100%; }
+		}
+		.activity-group { 
+						//squish that padding in there
+						box-sizing: border-box; 
+						padding: 1%; 
+						} 	
 		.task-red { background-color: #F44336; 
 					color: white;
 					 }
@@ -60,19 +78,20 @@
 					$(btn.id).removeClass("btn-neutral");
 					$(btn.id).addClass(newClass)*/
 			});
+			$(".grid").masonry({
+				itemSelector: '.grid-item',
+				columnWidth: '.grid-sizer',
+				percentPosition: true });
 			});
 		</script>
 {% endblock %}
 {% block content %}
-		<div class="row non-secret-row">
+		<div class="grid">
+		<div class="grid-sizer"></div>
+		<div class="gutter-sizer"></div>
 		<!-- begin row -->
 {% for task in tasks %}
-			{% if forloop.counter0|divisibleby:"4" %}
-		</div>
-		<div class="row non-secret-row">
-			{% endif %}
-			<!-- bootstrap spacing -->
-			<div class="col-xs-12 col-sm-4 col-md-3">
+			<div class="grid-item">
 			<div class="activity-group well task-{{task.colour}}" id="task_{{ task.pk }}">
 				<h1 class="activity_title">
 					<a href="{% url 'reminders:detail' pk=task.pk %}">{{task.label}}</a>
@@ -96,5 +115,4 @@
 {% endfor %}
 		<!-- end .row -->
 		</div>
-
 {% endblock %}

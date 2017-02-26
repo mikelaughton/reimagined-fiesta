@@ -24,6 +24,15 @@ class IndexView(generic.ListView):
 	def get_queryset(self):
 		return Task.objects.filter(user=self.request.user)
 
+@method_decorator(login_required,name='dispatch')
+class MasonryView(generic.ListView):
+	template_name = 'reminders/index_masonry.html'
+	context_object_name = 'tasks'
+	next = reverse_lazy("adulting:index")
+
+	def get_queryset(self):
+		return Task.objects.filter(user=self.request.user)
+
 class RegisterView(generic.edit.CreateView):
 	template_name = 'reminders/register.html'
 	form_class = UserCreationForm
