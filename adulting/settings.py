@@ -71,6 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'adulting.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -114,12 +115,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static'),'/var/www/adulting/static']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-#STATIC_ROOT = '/var/www/adulting/static'
-#MEDIA_ROOT = '/var/www/adulting/media'
+if DEBUG == False:
+	STATIC_ROOT = '/var/www/adulting/static'
+	MEDIA_ROOT = '/var/www/adulting/media'
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 

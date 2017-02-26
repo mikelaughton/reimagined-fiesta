@@ -1,0 +1,33 @@
+body { font-family: Poppins; }
+header { //background-color: teal; 
+		color: #717171; text-align:center;  }
+header h1#site_title a { 
+	color: #717171; 
+	font-family: 'Pacifico'; 
+	font-weight: boldest; }
+@media screen and (min-width: 1024px) { 
+	header h1#site_title a {  font-size: 360%; } 
+	header p#strapline { 
+	font-size: 180%; 
+		}
+	}
+@media screen and (max-width: 1023px) {
+	header h1#site_title a { font-size: 56px; }
+	header p#strapline { font-size: 12px; }
+	}
+header p#strapline { 
+	font-family: Mada; }
+header a { color: #CCA214; 
+		font-weight: bold; } 
+header nav#user-options, footer { 
+	//blue contrast teal: background-color: #07648D;
+	//grayish: background-color: #3169D1;
+	background-color: #CBCBCB; 
+	color:black;  }
+header nav#user-options {
+	text-align:right; }
+header nav#user-options a { color: #3169D1; }
+p>time{ font-size:180%; }
+.activity-group{ text-align:center; }
+footer { //background-color: #07648D; 
+	color:black; text-align:center; } 

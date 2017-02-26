@@ -17,9 +17,16 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
 	url(r'^',include('reminders.urls',namespace="reminders")),
 	url(r'^accounts/',include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG == False:
+	urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+
+else:
+	urlpatterns += staticfiles_urlpatterns()
