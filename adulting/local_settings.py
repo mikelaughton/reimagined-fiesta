@@ -82,19 +82,6 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
-	DATABASES = {
-
-		'default': {
-				'ENGINE': 'django.db.backends.mysql',
-				'NAME': 'adulting_database',
-				'USER': 'adulter',
-				'PASSWORD':'Vladonia1',
-				'HOST':'localhost',
-				'PORT':'',
-			}
-	
-	}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

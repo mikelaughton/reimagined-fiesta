@@ -41,11 +41,13 @@ class RegisterView(generic.edit.CreateView):
 class TaskDetailView(generic.DetailView):
 	model = Task
 
+@method_decorator(login_required, name='dispatch')
 class TaskCreateView(generic.edit.CreateView):
 	model = Task
 	template_name_suffix = '_create'
+	success_url = '/'
 	form_class = TaskForm
-	@login_required
+
 	def form_valid(self,form):
 		form.instance.user = self.request.user
 		return super(TaskCreateView,self).form_valid(form)

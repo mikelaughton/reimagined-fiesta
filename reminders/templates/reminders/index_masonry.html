@@ -63,13 +63,14 @@
 
 			$(document).ready(function(){
 				$("a.btn").click(function(e){
-					e.preventDefault(); console.log(e.target.href);;
+					e.preventDefault(); console.log(e.target.href);
 					t = $.post(e.target.href,{the_task:e.target.href[-1], csrfmiddlewaretoken: csrftoken });
 					console.log(t.responseText);
-					$(e.target).parent().find("p.time").text("New!");
-					console.log(e.target);
-					console.log($(e.target).parent());
-					console.log($(e.target).parentsUntil("div").find("time"));
+					/* Fix this so that it doesn't do it to countdown ones... */
+					$(this).closest("div.activity-group").find("time").first().text("0 {% trans 'seconds' noop %}");
+					console.log(this);
+					console.log($(this).parent());
+					console.log($(this).parent().parent().children("time"));
 					/*btn = e.target.id;
 					$(btn.id).removeClass("btn-success");
 					$(btn.id).addClass("btn-neutral");
@@ -113,6 +114,12 @@
 			</div>
 			<!-- end bootstrap spacing -->
 {% endfor %}
+			<div class="grid-item">
+				<div class="activity-group well task-create">
+					<h1>{% trans 'Create reminder' %}</h1>
+					<p style="font-size:400%;"><a href="{% url 'reminders:create' %}">+</a></p>
+				</div>
+			</div>
 		<!-- end .row -->
 		</div>
 {% endblock %}

@@ -4,14 +4,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>{% block title %}{% endblock %}</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static 'css/base.css' %}">
 		<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 		<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Pacifico|Mada|Poppins" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Pacifico|Mada|Poppins" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			<!--
 			Dominant colour: 008080;
 			Complement colour: #07648D;
@@ -19,40 +16,8 @@
 			Secondary colour: FF5AC2;
 			-->
 		<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
 		<style>
-			body { font-family: Poppins; }
-			header { //background-color: teal; 
-					color: #717171; text-align:center;  }
-			header h1#site_title a { 
-				color: #717171; 
-				font-family: 'Pacifico'; 
-				font-weight: boldest; }
-			@media screen and (min-width: 1024px) { 
-				header h1#site_title a {  font-size: 360%; } 
-				header p#strapline { 
-				font-size: 180%; 
-					}
-				}
-			@media screen and (max-width: 1023px) {
-				header h1#site_title a { font-size: 56px; }
-				header p#strapline { font-size: 12px; }
-				}
-			header p#strapline { 
-				font-family: Mada; }
-			header a { color: #CCA214; 
-					font-weight: bold; } 
-			header nav#user-options, footer { 
-				//blue contrast teal: background-color: #07648D;
-				//grayish: background-color: #3169D1;
-				background-color: #CBCBCB; 
-				color:black;  }
-			header nav#user-options {
- 				text-align:right; }
-			header nav#user-options a { color: #3169D1; }
-			p>time{ font-size:180%; }
-			.activity-group{ text-align:center; }
-			footer { //background-color: #07648D; 
-				color:black; text-align:center; } 
 			{% block style %}{% endblock %}
 		</style>
 		{% block extra_head %}{% endblock %}
@@ -65,7 +30,7 @@
 		{%if user.is_authenticated %}		
 		<p>Howdy {{user.username}}. <a href="{% url 'logout' %}">Logout</a></p>
 		{% else %}
-		<p><a href="#">{% trans 'Register' noop %}</a></p>
+		<p><a href="{% url 'reminders:register' %}">{% trans 'Register' noop %}</a></p>
 		{% endif %}
 		</nav>
 	</header>

@@ -30,7 +30,7 @@
 		{%if user.is_authenticated %}		
 		<p>Howdy {{user.username}}. <a href="{% url 'logout' %}">Logout</a></p>
 		{% else %}
-		<p><a href="#">{% trans 'Register' noop %}</a></p>
+		<p><a href="{% url 'reminders:register' %}">{% trans 'Register' noop %}</a></p>
 		{% endif %}
 		</nav>
 	</header>
