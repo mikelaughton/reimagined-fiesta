@@ -1,0 +1,41 @@
+.grid { max-width: 98%; margin: 1% auto; }
+		.grid-item, .stamp { margin-bottom: 2%; }
+		.grid-sizer { width: 25%; }
+		.stamp { position:absolute; right:0%; top:0%; }
+
+		@media screen and (min-width: 1025px) {
+			/*guttering be hard, yo.*/
+		.grid-item, .stamp { width: calc(25% - 2%); }
+		}
+		@media screen and (max-width: 1024px) {
+		  .grid-sizer, .stamp { width: 33%; }
+		  .grid-item { width: calc(33.3333% - 2%); }	
+		}
+		@media screen and (max-width: 768px) {
+		.grid-item, .stamp { width: 100%; }
+		.stamp{ position: static; }
+		}
+		@media screen and (max-width: 320px){
+		}
+		.activity-group { 
+						//squish that padding in there
+						box-sizing: border-box; 
+						padding: 1%; 
+						} 	
+		.task-red { background-color: #F44336; 
+					color: white;
+					 }
+		.task-red a { color: #FFEF86; }
+		.task-yellow { background-color: #FFEB3B;
+						color: black;
+						}
+		.task-blue { 
+					background-color: #2196F3;
+					color: white;
+					}
+		.task-blue a { color: #FFD727; }
+		.task-green {
+					background-color: #4CAF50;
+					color: white;
+					 }
+		.task-green a { color: #A9E2AD; }

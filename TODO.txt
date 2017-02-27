@@ -1,5 +1,6 @@
 * Click to perform task (done, although poorly)
 * Add task view
+* Modularise jQuery code. (HOW?!)
 * Shift styles, scripts to external static files
 * Performance should dismiss countdown tasks (i.e. move them to an archive) and reset counter on countup tasks.
 * Secret tasks

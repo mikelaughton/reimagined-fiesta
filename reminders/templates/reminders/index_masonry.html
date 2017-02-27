@@ -3,45 +3,8 @@
 {% get_media_prefix as media_prefix %}
 
 {% block title %} Adulting {% endblock %}
-{% block style %}
-		.grid { max-width: 98%; margin: 1% auto; }
-		.grid-item { margin-bottom: 2%; }
-		.grid-sizer { width: 25%; }
-		@media screen and (min-width: 1025px) {
-			/*guttering be hard, yo.*/
-		.grid-item { width: calc(25% - 2%); }
-		}
-		@media screen and (max-width: 1024px) {
-		  .grid-sizer{ width: 33%; }
-		  .grid-item { width: calc(33.3333% - 2%); }	
-		}
-		@media screen and (max-width: 768px) {
-		.grid-item { width: 100%; }
-		}
-		.activity-group { 
-						//squish that padding in there
-						box-sizing: border-box; 
-						padding: 1%; 
-						} 	
-		.task-red { background-color: #F44336; 
-					color: white;
-					 }
-		.task-red a { color: #FFEF86; }
-		.task-yellow { background-color: #FFEB3B;
-						color: black;
-						}
-		.task-blue { 
-					background-color: #2196F3;
-					color: white;
-					}
-		.task-blue a { color: #FFD727; }
-		.task-green {
-					background-color: #4CAF50;
-					color: white;
-					 }
-		.task-green a { color: #A9E2AD; }
-{% endblock %}
 {% block extra_head %}
+		<link rel="stylesheet" href="{% static 'css/task-style.css' %}">
 		<script>
 			//Probably best putting this in an external script. Thanks Django docs!
 			function getCookie(name) {
@@ -64,7 +27,7 @@
 			$(document).ready(function(){
 				$("a.btn").click(function(e){
 					e.preventDefault(); console.log(e.target.href);
-					t = $.post(e.target.href,{the_task:e.target.href[-1], csrfmiddlewaretoken: csrftoken });
+					t = $.post(e.target.href,{the_task:e.target.href[-1], csrfmiddlewaretoken: csrftoken },function(response){console.log(response)});
 					console.log(t.responseText);
 					/* Fix this so that it doesn't do it to countdown ones... */
 					$(this).closest("div.activity-group").find("time").first().text("0 {% trans 'seconds' noop %}");
@@ -82,7 +45,8 @@
 			$(".grid").masonry({
 				itemSelector: '.grid-item',
 				columnWidth: '.grid-sizer',
-				percentPosition: true });
+				percentPosition: true,
+				stamp: '.stamp' });
 			});
 		</script>
 {% endblock %}
@@ -114,7 +78,7 @@
 			</div>
 			<!-- end bootstrap spacing -->
 {% endfor %}
-			<div class="grid-item">
+			<div class="stamp">
 				<div class="activity-group well task-create">
 					<h1>{% trans 'Create reminder' %}</h1>
 					<p style="font-size:400%;"><a href="{% url 'reminders:create' %}">+</a></p>

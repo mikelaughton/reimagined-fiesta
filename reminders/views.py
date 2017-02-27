@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth import authenticate, login
@@ -41,6 +41,10 @@ class RegisterView(generic.edit.CreateView):
 class TaskDetailView(generic.DetailView):
 	model = Task
 
+class TaskDeleteView(generic.edit.DeleteView):
+	#def ajax to send Json instead
+	model = Task
+
 @method_decorator(login_required, name='dispatch')
 class TaskCreateView(generic.edit.CreateView):
 	model = Task
@@ -52,7 +56,7 @@ class TaskCreateView(generic.edit.CreateView):
 		form.instance.user = self.request.user
 		return super(TaskCreateView,self).form_valid(form)
 
-class PerformanceChangeView(generic.edit.CreateView):
+class PerformanceCreateView(generic.edit.CreateView):
 	model = Performance
 	fields = ['perf_date']
 	template_name_suffix = '_update_form'
@@ -61,16 +65,18 @@ class PerformanceChangeView(generic.edit.CreateView):
 		return context
 
 def PerformView(request,task_id):
-	if request.method == "POST":
-		the_task = get_object_or_404(Task,pk=task_id)
-		new_perf = Performance(perf_date=datetime.now(),task=the_task)
-		try:
-			new_perf.save()
-			return HttpResponse("Hurray")
-		except KeyError:
-			return HttpResponse("Key error.")
-		else:
-			return HttpResponse("Fail")
-	elif request.method=="GET":
-		#Set up a proper view.
-		return HttpResponse("Nah mate.")
+	if request.is_ajax:
+		data = {}
+		if request.method == "POST":
+			the_task = get_object_or_404(Task,pk=task_id)
+			new_perf = Performance(perf_date=datetime.now(),task=the_task)
+			try:
+				new_perf.save()
+				data["message"]="Success"
+				data["is_countdown"] = the_task.countdown
+				return JsonResponse(data)
+			except Exception:
+				data["message"]="Failure"
+				return JsonResponse(data)
+	else:
+		return render(request,"reminders/perform_update_form.html")
