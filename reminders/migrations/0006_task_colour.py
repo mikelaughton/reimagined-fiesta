@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='task',
             name='colour',
-            field=models.CharField(choices=[('#F44336', 'red'), ('#4CAF50', 'green'), ('#FFEB3B', 'yellow'), ('#2196F3', 'blue')], default=('#F44336', 'red'), max_length=7, verbose_name='Colour'),
+            field=models.CharField(choices=[('#F44336', 'red'), ('#4CAF50', 'green'), ('#FFEB3B', 'yellow'), ('#2196F3', 'blue')], default='red', max_length=7, verbose_name='Colour'),
         ),
     ]
