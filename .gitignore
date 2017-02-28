@@ -1,0 +1,7 @@
+venv/
+*.sqlite3
+*.pyc
+*.xcf
+favico_raw.ico
+#adulting/settings.py
+adulting/local_settings.py
