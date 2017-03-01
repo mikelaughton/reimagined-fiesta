@@ -1,24 +1,25 @@
-* Click to perform task (done, although poorly)
-* Add task view
-* Modularise jQuery code. (HOW?!)
-* Modularise settings view (done)
-	* One option import from folder outside the project?
-	* Second option, .gitignore wsgi.py and pass it different settings?
-* Hide secret keys (and change them) (done)
-* Shift styles, scripts to external static files (mostly)
-* Performance should dismiss countdown tasks (i.e. move them to an archive) and reset counter on countup tasks.
-* Secret tasks
-* Class to colour the task (done, maybe add more themes)
-* Countup implementation (done)
-	* Work out how to refresh timesince/timeuntil with jQuery. (You may have to implement timesince in jQuery, which seems like a waste of time.)
-* Countdown implementation (done, need to dismiss task)
-* Recurring notes/non-recurring notes
-* Login (done)
-* Logout (done)
-* Register (done)
-* Task detail (see history of) (done).
-* Receive notifications when the thing expires (done)
-* So, one thing to do is to create a separate Python script that polls the tasks database for all the ones with an expired and expired_email flag (non-editable for the user). Every minute or so, cron could run this script to email you that the thing that's timed down has timed down.
-	How would you get recurring emails?
-	How would you be able to turn them off?
-	Can I use Nexmo for like 10 minutes?! It might be really cool.
+Refactoring:
+	* Modularise jQuery (how in all sweet Mary I do not know)
+	* Split settings (done)
+	* Change secret key
+	* Shift all jQuery to external JS files (partial)
+	* Shift all CSS to external CSS files (done?)
+
+Features:
+	* Date/time widget (pick one) (done)
+		* It does however appear slightly off screen on mobile.
+	* Archive task
+		* Archive task without leaving page
+	* Create task
+		* Create task without leaving page
+	* Create recurring tasks
+	* Notification when something needs doing
+		* By email
+		* Stretch: by text
+	* Secret tasks (by extension, one will not need email)
+
+Appearance:
+	* Get your own icons, the Unicode jazz ain't cutting it
+
+Random:
+	* Get GitHub to stop calling my thing a javascript repo when it isn't.

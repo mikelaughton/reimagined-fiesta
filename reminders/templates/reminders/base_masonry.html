@@ -9,6 +9,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Pacifico|Mada|Poppins" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 			<!--
 			Dominant colour: 008080;
 			Complement colour: #07648D;
@@ -17,7 +18,7 @@
 			-->
 		<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 		<link rel="stylesheet" href="{% static 'css/base.css' %}">
-		<link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="{% static 'favicon.ico?' %}" type="image/x-icon">
 		<style>
 			{% block style %}{% endblock %}
 		</style>
@@ -35,7 +36,7 @@
 		{% endif %}
 		</nav>
 	</header>
-	<section id="main" class="container-fluid">
+	<section id="main" class="container">
 		<!-- this is going to be a for loop -->
 		{% block content %}{% endblock %}
 	</section>

@@ -3,13 +3,16 @@
 {% get_media_prefix as media_prefix %}
 
 {% block title %} Adulting: Create a task {% endblock %}
+{% block extra_head %}
+{{form.media}}
+{% endblock %}
 {% block content %}
 		<div class="row" id="">
-			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
+			<div class="activity-single col-xs-10 col-sm-12 col-md-9" id="1">
 				<h1 class="activity_title">{{performance.task.label}}</h1>
-				<form action="{% url 'reminders:create' %}" method="post">
+				<form action="{% url 'reminders:create' %}" method="post" class="form-horizontal">
 					{% csrf_token %}
-					{{ form.as_p }}
+					{{ form.as_table }}
 					<input type="submit" value="submit">
 				</form>
 			</div>
