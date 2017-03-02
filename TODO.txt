@@ -3,23 +3,27 @@ Refactoring:
 	* Split settings (done)
 	* Change secret key
 	* Shift all jQuery to external JS files (partial)
-	* Shift all CSS to external CSS files (done?)
+	* Shift all CSS to external CSS files (done)
 
 Features:
 	* Date/time widget (pick one) (done)
 		* It does however appear slightly off screen on mobile.
 	* Archive task
 		* Archive task without leaving page
-	* Create task
+	* Create task (done)
 		* Create task without leaving page
 	* Create recurring tasks
 	* Notification when something needs doing
 		* By email
 		* Stretch: by text
 	* Secret tasks (by extension, one will not need email)
+	* Show something more exciting in the history
+		* Attach details?
+	* Perform task within task detail page
 
 Appearance:
 	* Get your own icons, the Unicode jazz ain't cutting it
+	* Change create button
 
 Random:
 	* Get GitHub to stop calling my thing a javascript repo when it isn't.
