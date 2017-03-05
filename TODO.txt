@@ -4,6 +4,9 @@ Refactoring:
 	* Change secret key
 	* Shift all jQuery to external JS files (partial)
 	* Shift all CSS to external CSS files (done)
+	* Self host bootstrap and all that - move invocation to bottom, it's REALLY doing your loadtime hell
+	* Add reasonable fallbacks if Google Fonts isn't available
+	* Image-ify logo - will lower load on Pi
 
 Features:
 	* Date/time widget (pick one) (done)
@@ -17,8 +20,12 @@ Features:
 		* By email
 		* Stretch: by text
 	* Secret tasks (by extension, one will not need email)
+		* Padlock, tap to swivel around with password field displayed? (Stupid, no idea what the task is.)
+		* Button in top-right saying "show all"?
+		* Button in top-right saying "show archived" to disambiguate?
+		* Custom tag filter - "Secret" becomes "s****t"?
 	* Show something more exciting in the history
-		* Attach details?
+		* Attach details? (GenericForeignKeyRelation)
 	* Perform task within task detail page
 
 Appearance:

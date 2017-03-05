@@ -1,9 +1,12 @@
-{% extends "reminders/base_masonry.html" %}
-{% load static i18n %}
+{% extends "reminders/base.html" %}
+{% load static i18n remindertags %}
 {% get_media_prefix as media_prefix %}
 
 {% block title %} Adulting {% endblock %}
+{% block section_class %}container{% endblock %}
 {% block extra_head %}
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 		<link rel="stylesheet" href="{% static 'css/task-style.css' %}">
 		<script>
 			//Probably best putting this in an external script. Thanks Django docs!
@@ -58,6 +61,7 @@
 {% for task in tasks %}
 			<div class="grid-item">
 			<div class="activity-group well task-{{task.colour}}" id="task_{{ task.pk }}">
+	{% if not task.is_secret %}
 				<h1 class="activity_title">
 					<a href="{% url 'reminders:detail' pk=task.pk %}">{{task.label}}</a>
 				</h1>
@@ -74,6 +78,11 @@
 					{% endif %} 
 				</p>
 				<p><a href="{% url 'reminders:perform' task_id=task.pk %}" class="btn btn-success">Done</a></p>
+	{% else %}
+	<!-- this is a stupid implementation, how the hell does anyone know which secret task it is? -->
+	<h1 class="activity_class">{{ task.label|starout }}</h1>
+	<a href="{% url 'reminders:detail' pk=task.pk %}">View detail.</a>
+	{% endif %}
 			</div>
 			</div>
 			<!-- end bootstrap spacing -->

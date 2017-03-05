@@ -8,4 +8,4 @@ class TaskForm(forms.ModelForm):
 	class Meta:
 		model = Task
 		exclude = ['user']
-		widgets = { 'deadline': DateTimeWidget(usel10n=True, bootstrap_version=3,options={}), 'entry_date': DateTimeWidget(usel10n= True, bootstrap_version=3) }
+		widgets = { 'deadline': DateTimeWidget(usel10n=True, bootstrap_version=3,options={'container':'form#createform'}), 'entry_date': DateTimeWidget(usel10n= True, bootstrap_version=3,options={'container':'form#createform'}) }
