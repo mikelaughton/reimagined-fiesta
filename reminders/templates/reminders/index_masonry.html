@@ -4,47 +4,14 @@
 
 {% block title %} Adulting {% endblock %}
 {% block section_class %}container{% endblock %}
-{% block extra_head %}
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+{% block extra_head %} 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"  crossorigin="anonymous"></script>
+	<script src="{% static 'js/asynctasks.js' %}"></script>
 	<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 		<link rel="stylesheet" href="{% static 'css/task-style.css' %}">
 		<script>
-			//Probably best putting this in an external script. Thanks Django docs!
-			function getCookie(name) {
-				var cookieValue = null;
-				if (document.cookie && document.cookie !== '') {
-					var cookies = document.cookie.split(';');
-					for (var i = 0; i < cookies.length; i++) {
-						var cookie = jQuery.trim(cookies[i]);
-						// Does this cookie string begin with the name we want?
-						if (cookie.substring(0, name.length + 1) === (name + '=')) {
-						    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-						    break;
-						}
-					}
-				}
-				return cookieValue;
-			}
-			var csrftoken = getCookie('csrftoken');
-
 			$(document).ready(function(){
-				$("a.btn").click(function(e){
-					e.preventDefault(); console.log(e.target.href);
-					t = $.post(e.target.href,{the_task:e.target.href[-1], csrfmiddlewaretoken: csrftoken },function(response){console.log(response)});
-					console.log(t.responseText);
-					/* Fix this so that it doesn't do it to countdown ones... */
-					$(this).closest("div.activity-group").find("time").first().text("0 {% trans 'seconds' noop %}");
-					console.log(this);
-					console.log($(this).parent());
-					console.log($(this).parent().parent().children("time"));
-					/*btn = e.target.id;
-					$(btn.id).removeClass("btn-success");
-					$(btn.id).addClass("btn-neutral");
-					t = $.load($(btn.id).href);
-					newClass = (t == "Hurray") ? "btn-success" : "btn-warning";
-					$(btn.id).removeClass("btn-neutral");
-					$(btn.id).addClass(newClass)*/
-			});
+			init_done_buttons();
 			$(".grid").masonry({
 				itemSelector: '.grid-item',
 				columnWidth: '.grid-sizer',
