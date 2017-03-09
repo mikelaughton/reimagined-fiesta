@@ -41,9 +41,11 @@ class RegisterView(generic.edit.CreateView):
 class TaskDetailView(generic.DetailView):
 	model = Task
 
+@method_decorator(login_required,name='dispatch')
 class TaskDeleteView(generic.edit.DeleteView):
 	#def ajax to send Json instead
 	model = Task
+	success_url = reverse_lazy("reminders:index")
 
 @method_decorator(login_required, name='dispatch')
 class TaskCreateView(generic.edit.CreateView):
@@ -60,16 +62,17 @@ class PerformanceCreateView(generic.edit.CreateView):
 	model = Performance
 	fields = ['perf_date']
 	template_name_suffix = '_update_form'
+	
 	def get_context_data(self,**kwargs):
 		context = super(PerformanceChangeView,self).get_context_data(**kwargs)
 		return context
 
 def PerformView(request,task_id):
-	if request.is_ajax:
-		data = {}
-		if request.method == "POST":
-			the_task = get_object_or_404(Task,pk=task_id)
-			new_perf = Performance(perf_date=datetime.now(),task=the_task)
+	the_task = get_object_or_404(Task,pk=task_id)
+	if request.method == "POST":
+		new_perf = Performance(perf_date=datetime.now(),task=the_task)
+		if request.is_ajax:
+			data = {}
 			try:
 				new_perf.save()
 				data["message"]="Success"
@@ -78,5 +81,10 @@ def PerformView(request,task_id):
 			except Exception:
 				data["message"]="Failure"
 				return JsonResponse(data)
-	else:
-		return render(request,"reminders/perform_update_form.html")
+		else:
+			return HTTPResponseRedirect(reverse("adulting:index"))
+	if request.method == "GET":
+		form = PerformanceForm
+		extra_context = {}
+		extra_context['form'] = form
+		return render(request,"reminders/performance_update_form.html",extra_context)

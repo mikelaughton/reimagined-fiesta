@@ -9,3 +9,9 @@ class TaskForm(forms.ModelForm):
 		model = Task
 		exclude = ['user']
 		widgets = { 'deadline': DateTimeWidget(usel10n=True, bootstrap_version=3), 'entry_date': DateTimeWidget(usel10n= True, bootstrap_version=3) }
+		
+class PerformanceForm(forms.ModelForm):
+	class Meta:
+		model = Performance
+		exclude = ('task',)
+		widgets = { 'perf_date': DateTimeWidget(usel10n=True,bootstrap_version=3) }

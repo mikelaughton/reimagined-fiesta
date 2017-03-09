@@ -1,8 +1,7 @@
 Refactoring:
-	* Modularise jQuery (how in all sweet Mary I do not know)
+	* Modularise jQuery (how in all sweet Mary I do not know) (done)
 	* Split settings (done)
-	* Change secret key
-	* Shift all jQuery to external JS files (partial)
+	* Change secret keys (done)
 	* Shift all CSS to external CSS files (done)
 	* Self host bootstrap and all that - move invocation to bottom, it's REALLY doing your loadtime hell
 	* Add reasonable fallbacks if Google Fonts isn't available
@@ -15,6 +14,7 @@ Features:
 		* Archive task without leaving page
 	* Create task (done)
 		* Create task without leaving page
+	* Perform task with leaving page
 	* Create recurring tasks
 	* Notification when something needs doing
 		* By email

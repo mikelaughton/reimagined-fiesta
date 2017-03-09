@@ -4,15 +4,16 @@
 {% block extra_head %}
 {{ form.media }}
 {% endblock %}
-{% block title %} Adulting: {{ task }} detail {% endblock %}
+{% block title %} Adulting: {{ task }} delete {% endblock %}
 {% block content %}
 		<div class="row" id="">
 			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
 				<h1 class="activity_title">{{performance.task.label}}</h1>
-				<form action="{% url 'reminders:perform' task_id=task.pk %}" method="post">
+				<form action="" method="post">
 					{% csrf_token %}
+					<p>{% trans 'Are you sure?' noop %}</p>
 					{{ form.as_p }}
-					<input type="submit" value="submit">
+					<input type="submit" value="{% trans 'Yes' noop %}"class="btn btn-danger"> <a class="btn btn-default" href="{% url 'reminders:index' %}">Cancel</a>
 				</form>
 			</div>
 		</div>

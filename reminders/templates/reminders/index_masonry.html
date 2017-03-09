@@ -12,6 +12,7 @@
 		<script>
 			$(document).ready(function(){
 			init_done_buttons();
+			init_create_buttons();
 			$(".grid").masonry({
 				itemSelector: '.grid-item',
 				columnWidth: '.grid-sizer',
@@ -44,7 +45,7 @@
 						{% endif %}
 					{% endif %} 
 				</p>
-				<p><a href="{% url 'reminders:perform' task_id=task.pk %}" class="btn btn-success">Done</a></p>
+				<p><a href="{% url 'reminders:perform' task_id=task.pk %}" class="btn btn-success perform_action">Done</a><a href="{% url 'reminders:delete' pk=task.pk %}" class="btn btn-danger">{% trans 'Delete' %}</a></p>
 	{% else %}
 	<!-- this is a stupid implementation, how the hell does anyone know which secret task it is? -->
 	<h1 class="activity_class">{{ task.label|starout }}</h1>
