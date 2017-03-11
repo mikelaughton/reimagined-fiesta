@@ -8,7 +8,7 @@
 {% block content %}
 		<div class="row" id="">
 			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
-				<h1 class="activity_title">{{performance.task.label}}</h1>
+				<h1 class="activity_title">Delete task <span class="task-label">{{task.label}}</span>?</h1>
 				<form action="" method="post">
 					{% csrf_token %}
 					<p>{% trans 'Are you sure?' noop %}</p>

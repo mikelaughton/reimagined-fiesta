@@ -47,8 +47,28 @@ class TaskDeleteView(generic.edit.DeleteView):
 	model = Task
 	success_url = reverse_lazy("reminders:index")
 
+#Ajax response mixin.
+class AJAXMixin(object):
+	def form_invalid(self,form):
+		response = super(AJAXMixin,self).form_invalid(form)
+		if self.request.is_ajax:
+			return JsonResponse(form.errors,status=400)
+		else:
+			return response
+			
+	def form_valid(self,form):
+		#Redirects to success_url normally
+		response = super(AJAXMixin,self).form_valid(form)
+		if self.request.is_ajax():
+			#Let the view object query the object's PK.
+			data = { 'pk': self.object.pk, }
+			return JsonResponse(data)
+		else:
+			#Defined elsewhere
+			return response
+
 @method_decorator(login_required, name='dispatch')
-class TaskCreateView(generic.edit.CreateView):
+class TaskCreateView(AJAXMixin,generic.edit.CreateView):
 	model = Task
 	template_name_suffix = '_create'
 	success_url = '/'

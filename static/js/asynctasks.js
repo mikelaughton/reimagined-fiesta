@@ -29,6 +29,8 @@ var resettimer = function(obj){
 	console.log(timer);
 	timer.text(new_text);
 }
+
+//You could make this work too.
 perform_task = function(e){
 	//Send AJAX request to relevant URL.
 	url = e.target.href;
@@ -50,8 +52,9 @@ perform_task_handler = function(req,e){
 	if(riscd) { dismiss_task(e.target); }
 }
 
+//You could make this more generic but let's run with it for now.
 disable_buttons = function(){
-	//Tee up the buttons.	
+	//Tee up the buttons.  Class should really be called perform_task.	
 	$("a.perform_action").click(function(e){
 		e.preventDefault();
 		$(e.target).removeClass("btn-success");
@@ -66,4 +69,19 @@ init_done_buttons = function(){
 	disable_buttons();
 }
 
-init_create_buttons = function() { return true; }
+
+
+build_create_form = function(obj,action){
+	form = $( "<form/>",{action:action,method:"POST"});
+	form.append("<p>Test</p>");
+	$(obj).append(form);
+}
+
+init_create_buttons = function() { 
+	$("a.create_task").click(function(e){
+		e.preventDefault();
+		form_container = $(".stamp").append("<div/>");
+		build_create_form(form_container,"#");
+		//$(e.target).off('click'); //Restore click event after doing something with the form.
+	});
+ }
