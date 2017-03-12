@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, HttpResponseForbidden
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth import authenticate, login
@@ -29,7 +29,15 @@ class MasonryView(generic.ListView):
 	template_name = 'reminders/index_masonry.html'
 	context_object_name = 'tasks'
 	next = reverse_lazy("adulting:index")
-
+	form_media = TaskForm()
+	form_media = str(form_media.media)
+	def get_context_data(self,**kwargs):
+		#Ask yourself the question, is this necessary?
+		#Add in the form media for the datepicker widget
+		#The 'create reminder' button depends on the media you supply to the form - if you change the form, you want the button to still work, because it's a pain in the arse.
+		context = super(MasonryView,self).get_context_data(**kwargs)
+		context['form']=str(self.form_media)
+		return context
 	def get_queryset(self):
 		return Task.objects.filter(user=self.request.user)
 
@@ -77,6 +85,16 @@ class TaskCreateView(AJAXMixin,generic.edit.CreateView):
 	def form_valid(self,form):
 		form.instance.user = self.request.user
 		return super(TaskCreateView,self).form_valid(form)
+
+@login_required
+def TaskCreateAjaxView(request):
+	if request.is_ajax():
+		form = TaskForm()
+		#Pass the form to the JSON so it can be dynamically rendered.
+		data = { 'status':'200', 'form':form.as_p() }
+		return JsonResponse(data)
+	else:
+		return HttpResponseForbidden("Maybe you meant to go to <a href='{0}'>{0}</a>?".format(reverse_lazy("reminders:create")))
 
 class PerformanceCreateView(generic.edit.CreateView):
 	model = Performance

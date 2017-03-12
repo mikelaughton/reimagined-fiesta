@@ -69,19 +69,33 @@ init_done_buttons = function(){
 	disable_buttons();
 }
 
-
-
-build_create_form = function(obj,action){
-	form = $( "<form/>",{action:action,method:"POST"});
-	form.append("<p>Test</p>");
-	$(obj).append(form);
+restore_task_create = function(){
+	$("task-create").replaceWith(task_create_clone);
 }
 
-init_create_buttons = function() { 
+build_create_form = function(obj,get_url,post_url){
+	form_req = $.getJSON(get_url,function(resp){
+		form = $( "<form/>",{action:post_url,method:"POST"});
+		$(form).append($(resp.form));
+		$(form).append('<input type="submit" value="Submit" class="btn btn-success"> <a class="btn btn-warning" id="cancel_create_button">Cancel</a>');
+		$("#cancel_create_button").click(function(){alert("Implement this!");});
+		$(form).append('<input type="hidden" value="'+csrftoken+'" name="csrfmiddlewaretoken">');
+		$(obj).append(form);
+		});
+}
+
+init_create_buttons = function(action_url) { 
 	$("a.create_task").click(function(e){
+		console.log("Clicked.");
 		e.preventDefault();
-		form_container = $(".stamp").append("<div/>");
-		build_create_form(form_container,"#");
-		//$(e.target).off('click'); //Restore click event after doing something with the form.
+		var task_create_clone = $("task-create").clone();
+		div = $("<div/>",{'class':'grid-item','id':'newForm'});
+		form_container = $("<div/>",{'class':'well activity-group task-create',});
+		$(div).append(form_container)
+		form = build_create_form(form_container,action_url,e.target.href);
+		$div = $(div);
+		$grid.append($div).masonry('appended',$div);
+		//$(".task-create").replaceWith(div);
+		$grid.masonry();
 	});
  }
