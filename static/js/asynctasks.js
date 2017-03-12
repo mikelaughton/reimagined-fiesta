@@ -68,19 +68,23 @@ disable_buttons = function(){
 init_done_buttons = function(){
 	disable_buttons();
 }
-
+var task_create_clone = $("task-create").clone(true);
 restore_task_create = function(){
-	$("task-create").replaceWith(task_create_clone);
+	$(".task-create").children().first().replaceWith(task_create_clone);
 }
 
 build_create_form = function(obj,get_url,post_url){
 	form_req = $.getJSON(get_url,function(resp){
 		form = $( "<form/>",{action:post_url,method:"POST"});
+		h1 = $("<h1>Create</h1>");
+		$(form).append(h1);
 		$(form).append($(resp.form));
-		$(form).append('<input type="submit" value="Submit" class="btn btn-success"> <a class="btn btn-warning" id="cancel_create_button">Cancel</a>');
-		$("#cancel_create_button").click(function(){alert("Implement this!");});
+		$(form).append($('<input type="submit" value="Submit" class="btn btn-success"> <a class="btn btn-warning" id="cancel_create_button">Cancel</a>'));
+		$grid.on('click','#cancel_create_button',restore_task_create);
 		$(form).append('<input type="hidden" value="'+csrftoken+'" name="csrfmiddlewaretoken">');
 		$(obj).append(form);
+		//I do not know why this works, but it does.
+		$grid.masonry();
 		});
 }
 
@@ -88,14 +92,13 @@ init_create_buttons = function(action_url) {
 	$("a.create_task").click(function(e){
 		console.log("Clicked.");
 		e.preventDefault();
-		var task_create_clone = $("task-create").clone();
 		div = $("<div/>",{'class':'grid-item','id':'newForm'});
 		form_container = $("<div/>",{'class':'well activity-group task-create',});
 		$(div).append(form_container)
 		form = build_create_form(form_container,action_url,e.target.href);
 		$div = $(div);
-		$grid.append($div).masonry('appended',$div);
-		//$(".task-create").replaceWith(div);
-		$grid.masonry();
+		$(".task-create").first().replaceWith(form_container);
+		//$("#create_button").hide();
+		$grid.masonry('layout');
 	});
  }
