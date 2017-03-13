@@ -39,7 +39,7 @@ class MasonryView(generic.ListView):
 		context['form']=str(self.form_media)
 		return context
 	def get_queryset(self):
-		return Task.objects.filter(user=self.request.user)
+		return Task.objects.filter(user=self.request.user).order_by('-entry_date')
 
 class RegisterView(generic.edit.CreateView):
 	template_name = 'reminders/register.html'
