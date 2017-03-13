@@ -68,9 +68,12 @@ disable_buttons = function(){
 init_done_buttons = function(){
 	disable_buttons();
 }
-var task_create_clone = $("task-create").clone(true);
+var task_create_clone = $('<div class="activity-group well task-create">' + "<h1>Create reminder</h1>" +
+'<p id="create_button" style="font-size:400%;"><a href="/create" class="create_task">+</a></p>' +'</div>');
 restore_task_create = function(){
-	$(".task-create").children().first().replaceWith(task_create_clone);
+	console.log(task_create_clone);
+	$(".task-create").replaceWith(task_create_clone);
+	$grid.masonry('layout');
 }
 
 build_create_form = function(obj,get_url,post_url){
