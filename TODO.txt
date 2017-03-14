@@ -8,13 +8,15 @@ Refactoring:
 	* Image-ify logo - will lower load on Pi
 
 Features:
+	* Better theme-picker widget (you may need to build it yourself)
 	* Date/time widget (pick one) (done)
 		* It does however appear slightly off screen on mobile.
 	* Archive task
 		* Archive task without leaving page
 	* Create task (done)
-		* Create task without leaving page
-	* Perform task with leaving page
+		* Create task without leaving page (done)
+		* Make it toggle - create button inserted by jquery doesn't work.
+	* Perform task with leaving page (done-ish)
 	* Create recurring tasks
 	* Notification when something needs doing
 		* By email

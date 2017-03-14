@@ -12,8 +12,23 @@
 			<div class="activity-single col-xs-12 col-sm-12 col-md-9" id="1">
 				<h1 class="activity_title">{{performance.task.label}}</h1>
 				<form action="{% url 'reminders:create' %}" method="post" id="createform" class="form-vertical">
-					{% csrf_token %}
-					{{ form.as_p }}
+					{% for field in form.visible_fields %}
+            <div id="div_{{ field.html_name }}"
+                 class="form-group{% if field.errors %} has-error{% endif %}">
+                {{ field.label_tag }}
+                {{ field }}
+                <div class="text-muted pull-right">
+                    <small>{{ field.help_text }}</small>
+                </div>
+                <div class="help-block">
+                    {{ field.errors }}
+                </div>
+            </div>
+            {% endfor %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% csrf_token %}
 					<input type="submit" value="submit">
 				</form>
 			</div>
