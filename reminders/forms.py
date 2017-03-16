@@ -8,6 +8,7 @@ my_attrs = {
 	"todayBtn":"linked",
 	"bootstrap_version":3,
 	"usel10n":True,
+	"format":"YYYY-M-D H:mm",
 }
 
 class TaskForm(forms.ModelForm):

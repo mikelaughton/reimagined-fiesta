@@ -39,4 +39,5 @@
 					color: white;
 					 }
 		.task-green a { color: #A9E2AD; }
-		a.btn { color: white; }
+		a.btn-success { color: white; }
+		a.btn-danger { color: white; }
